@@ -8283,7 +8283,7 @@ exports[`<RoomListView /> > renders LargeSectionList story 1`] = `
       tabindex="0"
     >
       <div
-        style="position: sticky; top: 0px; width: 100%; z-index: 1; margin-top: 0px;"
+        style="position: relative; top: 0px; width: 100%; z-index: 1; margin-top: 0px;"
       >
         <div
           data-testid="virtuoso-top-item-list"
@@ -13626,7 +13626,7 @@ exports[`<RoomListView /> > renders SmallSectionList story 1`] = `
       tabindex="0"
     >
       <div
-        style="position: sticky; top: 0px; width: 100%; z-index: 1; margin-top: 0px;"
+        style="position: relative; top: 0px; width: 100%; z-index: 1; margin-top: 0px;"
       >
         <div
           data-testid="virtuoso-top-item-list"
