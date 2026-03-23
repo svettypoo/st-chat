@@ -14,6 +14,12 @@ import { isDendrite } from "../../plugins/homeserver/dendrite";
 import { UIFeature } from "../../../src/settings/UIFeature";
 
 async function openSpaceCreateMenu(page: Page): Promise<Locator> {
+    // Dismiss "Verify this device" toast
+    await page
+        .locator(".mx_Toast_toast", { hasText: "Verify this device" })
+        .getByRole("button", { name: "Later" })
+        .click();
+
     await page.getByRole("button", { name: "Create a space" }).click();
     return page.locator(".mx_SpaceCreateMenu_wrapper .mx_ContextualMenu");
 }
@@ -282,6 +288,12 @@ test.describe("Spaces", () => {
         "should render subspaces in the space panel only when expanded",
         { tag: "@screenshot" },
         async ({ page, app, user, axe }) => {
+            // Dismiss "Verify this device" toast
+            await page
+                .locator(".mx_Toast_toast", { hasText: "Verify this device" })
+                .getByRole("button", { name: "Later" })
+                .click();
+
             axe.disableRules([
                 // Disable this check as it triggers on nested roving tab index elements which are in practice fine
                 "nested-interactive",

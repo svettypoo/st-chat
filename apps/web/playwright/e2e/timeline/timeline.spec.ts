@@ -792,6 +792,12 @@ test.describe("Timeline", () => {
                     await sendEvent(app.client, room.roomId, true);
                     await page.goto(`/#/room/${room.roomId}`);
 
+                    // Dismiss "Verify this device" toast
+                    await page
+                        .locator(".mx_Toast_toast", { hasText: "Verify this device" })
+                        .getByRole("button", { name: "Later" })
+                        .click();
+
                     await app.toggleRoomInfoPanel();
 
                     await page.locator(".mx_RoomSummaryCard_search").getByRole("searchbox").fill("Message");
@@ -816,6 +822,12 @@ test.describe("Timeline", () => {
                 await sendEvent(app.client, room.roomId);
 
                 await page.goto(`/#/room/${room.roomId}`);
+
+                // Dismiss "Verify this device" toast
+                await page
+                    .locator(".mx_Toast_toast", { hasText: "Verify this device" })
+                    .getByRole("button", { name: "Later" })
+                    .click();
 
                 // Open a room setting dialog
                 await app.toggleRoomInfoPanel();

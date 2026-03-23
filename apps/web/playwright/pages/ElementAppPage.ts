@@ -245,11 +245,17 @@ export class ElementAppPage {
     }
 
     /**
-     * Close the notification toast
+     * Close the verification and notification toasts
      */
-    public closeNotificationToast(): Promise<void> {
+    public async closeNotificationToast(): Promise<void> {
+        // Dismiss "Verify this device" toast
+        await this.page
+            .locator(".mx_Toast_toast", { hasText: "Verify this device" })
+            .getByRole("button", { name: "Later" })
+            .click();
+
         // Dismiss "Notification" toast
-        return this.page
+        await this.page
             .locator(".mx_Toast_toast", { hasText: "Notifications" })
             .getByRole("button", { name: "Dismiss" })
             .click();

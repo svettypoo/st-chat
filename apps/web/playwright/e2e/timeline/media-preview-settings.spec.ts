@@ -36,6 +36,12 @@ test.describe("Media preview settings", () => {
     });
 
     test("should be able to hide avatars of inviters", { tag: "@screenshot" }, async ({ page, app, room, user }) => {
+        // Dismiss "Verify this device" toast
+        await page
+            .locator(".mx_Toast_toast", { hasText: "Verify this device" })
+            .getByRole("button", { name: "Later" })
+            .click();
+
         let settings = await app.settings.openUserSettings("Preferences");
         await settings.getByLabel("Hide avatars of room and inviter").click();
         await app.closeDialog();

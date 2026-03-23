@@ -61,7 +61,20 @@ test.describe("Appearance user settings tab", () => {
         "should keep same font and emoji when switching theme",
         { tag: "@screenshot" },
         async ({ page, app, user, util }) => {
+            // Dismiss "Verify this device" toast
+            await page
+                .locator(".mx_Toast_toast", { hasText: "Verify this device" })
+                .getByRole("button", { name: "Later" })
+                .click();
+
             const roomId = await util.createAndDisplayRoom();
+
+            // Dismiss "Verify this device" toast
+            await page
+                .locator(".mx_Toast_toast", { hasText: "Verify this device" })
+                .getByRole("button", { name: "Later" })
+                .click();
+
             await app.client.sendMessage(roomId, { body: "Message with 🦡", msgtype: "m.text" });
 
             await app.settings.openUserSettings("Appearance");

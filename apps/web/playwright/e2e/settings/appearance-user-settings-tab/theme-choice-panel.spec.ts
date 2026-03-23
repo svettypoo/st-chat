@@ -14,9 +14,16 @@ test.describe("Appearance user settings tab", () => {
     });
 
     test.describe("Theme Choice Panel", () => {
-        test.beforeEach(async ({ app, user, util }) => {
+        test.beforeEach(async ({ app, user, util, page }) => {
             // Disable the default theme for consistency in case ThemeWatcher automatically chooses it
             await util.disableSystemTheme();
+
+            // Dismiss "Verify this device" toast
+            await page
+                .locator(".mx_Toast_toast", { hasText: "Verify this device" })
+                .getByRole("button", { name: "Later" })
+                .click();
+
             await util.openAppearanceTab();
         });
 
@@ -100,6 +107,12 @@ test.describe("Appearance user settings tab", () => {
                     await expect(page).toMatchScreenshot("window-custom-theme.png");
 
                     await page.reload();
+
+                    // Dismiss "Verify this device" toast
+                    await page
+                        .locator(".mx_Toast_toast", { hasText: "Verify this device" })
+                        .getByRole("button", { name: "Later" })
+                        .click();
 
                     await util.openAppearanceTab();
                     // Assert that the custom theme is still selected after reloading the page
