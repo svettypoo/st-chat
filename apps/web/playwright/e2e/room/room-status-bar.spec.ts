@@ -19,6 +19,7 @@ test.describe("Room Status Bar", () => {
             const roomId = await app.client.createRoom({
                 name: "A room",
             });
+            await app.closeVerifyToast();
             await app.closeNotificationToast();
             await app.viewRoomById(roomId);
             await use({ roomId });

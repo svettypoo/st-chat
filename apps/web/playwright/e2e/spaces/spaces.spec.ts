@@ -14,12 +14,6 @@ import { isDendrite } from "../../plugins/homeserver/dendrite";
 import { UIFeature } from "../../../src/settings/UIFeature";
 
 async function openSpaceCreateMenu(page: Page): Promise<Locator> {
-    // Dismiss "Verify this device" toast
-    await page
-        .locator(".mx_Toast_toast", { hasText: "Verify this device" })
-        .getByRole("button", { name: "Later" })
-        .click();
-
     await page.getByRole("button", { name: "Create a space" }).click();
     return page.locator(".mx_SpaceCreateMenu_wrapper .mx_ContextualMenu");
 }
@@ -73,6 +67,7 @@ test.describe("Spaces", () => {
         "should allow user to create public space",
         { tag: ["@screenshot", "@no-webkit"] },
         async ({ page, app, user }) => {
+            await app.closeVerifyToast();
             const contextMenu = await openSpaceCreateMenu(page);
             await expect(contextMenu).toMatchScreenshot("space-create-menu.png");
 
@@ -109,6 +104,7 @@ test.describe("Spaces", () => {
     );
 
     test("should allow user to create private space", { tag: "@screenshot" }, async ({ page, app, user }) => {
+        await app.closeVerifyToast();
         const menu = await openSpaceCreateMenu(page);
         await menu.getByRole("button", { name: "Private" }).click();
 
@@ -155,6 +151,7 @@ test.describe("Spaces", () => {
             name: "Sample Room",
         });
 
+        await app.closeVerifyToast();
         const menu = await openSpaceCreateMenu(page);
         await menu.getByRole("button", { name: "Private" }).click();
 
@@ -189,6 +186,7 @@ test.describe("Spaces", () => {
                 name: "A Room that will not be selected",
             });
 
+            await app.closeVerifyToast();
             const menu = await openSpaceCreateMenu(page);
             await menu.getByRole("button", { name: "Private" }).click();
 
@@ -288,11 +286,7 @@ test.describe("Spaces", () => {
         "should render subspaces in the space panel only when expanded",
         { tag: "@screenshot" },
         async ({ page, app, user, axe }) => {
-            // Dismiss "Verify this device" toast
-            await page
-                .locator(".mx_Toast_toast", { hasText: "Verify this device" })
-                .getByRole("button", { name: "Later" })
-                .click();
+            await app.closeVerifyToast();
 
             axe.disableRules([
                 // Disable this check as it triggers on nested roving tab index elements which are in practice fine
@@ -415,6 +409,7 @@ test.describe("Spaces", () => {
         });
 
         test("should disallow creating public rooms", { tag: "@screenshot" }, async ({ page, user, app }) => {
+            await app.closeVerifyToast();
             const menu = await openSpaceCreateMenu(page);
             await menu
                 .locator('.mx_SpaceBasicSettings_avatarContainer input[type="file"]')

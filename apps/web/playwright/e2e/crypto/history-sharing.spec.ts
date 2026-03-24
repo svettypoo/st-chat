@@ -35,6 +35,10 @@ test.describe("History sharing", function () {
             const bobPage = await createNewInstance(browser, bobCredentials, {}, labsFlags);
             const bobElementApp = new ElementAppPage(bobPage);
             await bobElementApp.client.bootstrapCrossSigning(bobCredentials);
+            await bobElementApp.closeKeyStorageToast();
+
+            await aliceElementApp.closeKeyStorageToast();
+            await aliceElementApp.closeNotificationToast();
 
             // Create the room and send a message
             await createRoom(alicePage, "TestRoom", true);
