@@ -1,0 +1,36 @@
+{
+    "default_server_config": {
+        "m.homeserver": {
+            "base_url": "https://chat.stproperties.com",
+            "server_name": "chat.stproperties.com"
+        }
+    },
+    "disable_custom_urls": true,
+    "disable_guests": true,
+    "disable_login_language_selector": true,
+    "disable_3pid_login": true,
+    "force_verification": false,
+    "brand": "S&T Chat",
+    "integrations_ui_url": "",
+    "integrations_rest_url": "",
+    "integrations_widgets_urls": [],
+    "default_country_code": "CA",
+    "show_labs_settings": false,
+    "features": {},
+    "default_federate": false,
+    "default_theme": "dark",
+    "room_directory": {
+        "servers": ["chat.stproperties.com"]
+    },
+    "setting_defaults": {
+        "breadcrumbs": true
+    },
+    "jitsi": {
+        "preferred_domain": "meet.stproperties.com"
+    },
+    "map_style_url": "",
+    "embedded_pages": {
+        "welcome_url": ""
+    },
+    "terms_and_conditions_links": []
+}
