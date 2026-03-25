@@ -21,7 +21,7 @@ import styles from "./RoomListPrimaryFilters.module.css";
 const filterIdToLabel = (filterId: FilterId): string => {
     switch (filterId) {
         case "all":
-            return _t("room_list|filters|all");
+            return "All";
         case "unread":
             return _t("room_list|filters|unread");
         case "people":

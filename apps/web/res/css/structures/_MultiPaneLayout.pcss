@@ -47,6 +47,7 @@ Please see LICENSE files in the repository root for full details.
     display: flex;
     justify-content: center;
     padding: 4px 0;
+    margin-left: var(--gutterSize, 14px);
     list-style: none;
 }
 
@@ -54,13 +55,14 @@ Please see LICENSE files in the repository root for full details.
     display: grid;
     grid-template-columns: 1fr;
     gap: 2px;
+    width: 32px; /* Match SpaceButton_narrow width */
 }
 
 .mx_LayoutSwitcher_btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
+    width: 32px;
     height: 24px;
     border: 1px solid transparent;
     border-radius: 6px;
