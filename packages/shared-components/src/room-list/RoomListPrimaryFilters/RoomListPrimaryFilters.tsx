@@ -20,6 +20,8 @@ import styles from "./RoomListPrimaryFilters.module.css";
  */
 const filterIdToLabel = (filterId: FilterId): string => {
     switch (filterId) {
+        case "all":
+            return _t("room_list|filters|all");
         case "unread":
             return _t("room_list|filters|unread");
         case "people":
@@ -104,7 +106,7 @@ export const RoomListPrimaryFilters = memo(function RoomListPrimaryFilters({
                     <ChatFilter
                         key={`${filterId}-${index}`}
                         role="option"
-                        selected={filterId === activeFilterId}
+                        selected={filterId === "all" ? activeFilterId === undefined : filterId === activeFilterId}
                         onClick={() => onToggleFilter(filterId)}
                     >
                         {filterIdToLabel(filterId)}

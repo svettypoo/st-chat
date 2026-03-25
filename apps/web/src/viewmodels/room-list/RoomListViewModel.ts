@@ -63,7 +63,7 @@ export class RoomListViewModel
         // Get initial rooms
         const roomsResult = RoomListStoreV3.instance.getSortedRoomsInActiveSpace(undefined);
         const canCreateRoom = hasCreateRoomRights(props.client, activeSpace);
-        const filterIds = [...filterKeyToIdMap.values()];
+        const filterIds: FilterId[] = ["all", ...filterKeyToIdMap.values()];
         const roomIds = roomsResult.rooms.map((room) => room.roomId);
         const sections = [{ id: "all", roomIds }];
 
@@ -119,6 +119,13 @@ export class RoomListViewModel
     }
 
     public onToggleFilter = (filterId: FilterId): void => {
+        if (filterId === "all") {
+            this.activeFilter = undefined;
+            // Trigger refresh with no filter
+            this.updateRoomListData();
+            return;
+        }
+
         // Find the FilterKey by matching the filter ID
         let filterKey: FilterKey | undefined = undefined;
         for (const [key, id] of filterKeyToIdMap.entries()) {

@@ -102,6 +102,7 @@
         },
         "expand_filters": "Expand filter list",
         "filters": {
+            "all": "All",
             "favourite": "Favourites",
             "invites": "Invites",
             "low_priority": "Low priority",
