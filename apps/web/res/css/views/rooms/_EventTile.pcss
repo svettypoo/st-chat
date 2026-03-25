@@ -224,9 +224,9 @@ $left-gutter: 64px;
 
         &:hover {
             .mx_EventTile_line {
-                /* Replace solid gray hover with subtle indigo aura glow */
+                /* Tight indigo outline + minimal glow — keeps hover close to message bounds */
                 background-color: transparent;
-                box-shadow: 0 0 16px rgba(99, 102, 241, 0.12);
+                box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.25), 0 0 6px rgba(99, 102, 241, 0.08);
                 border-radius: 8px;
             }
         }

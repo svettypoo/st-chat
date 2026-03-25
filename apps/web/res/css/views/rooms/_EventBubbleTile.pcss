@@ -97,9 +97,9 @@ Please see LICENSE files in the repository root for full details.
     &:hover,
     &.mx_EventTile_selected {
         &::before {
-            /* Subtle indigo aura on bubble hover instead of solid gray */
+            /* Tight indigo outline + minimal glow — keeps hover close to bubble bounds */
             background: rgba(99, 102, 241, 0.06);
-            box-shadow: 0 0 16px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.2), 0 0 4px rgba(99, 102, 241, 0.06);
         }
 
         .mx_EventTile_avatar {
@@ -214,8 +214,11 @@ Please see LICENSE files in the repository root for full details.
             justify-content: flex-start;
         }
 
-        /* Received messages: use the subtle secondary surface color */
+        /* Received messages: subtle secondary surface with visible border for contrast */
         --backgroundColor: var(--cpd-color-bg-subtle-secondary);
+        .mx_EventTile_line:not(.mx_EventTile_mediaLine) {
+            border: 1px solid var(--cpd-color-border-subtle, rgba(255, 255, 255, 0.08));
+        }
     }
 
     &[data-self="true"] {
@@ -278,8 +281,8 @@ Please see LICENSE files in the repository root for full details.
             inset-inline-end: 0;
         }
 
-        /* Sent messages: indigo gradient background */
-        --backgroundColor: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(129, 140, 248, 0.18) 100%);
+        /* Sent messages: solid indigo with higher opacity for better contrast */
+        --backgroundColor: rgba(99, 102, 241, 0.4);
     }
 
     .mx_EventTile_line {
