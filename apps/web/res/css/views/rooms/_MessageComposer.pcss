@@ -98,15 +98,27 @@ Please see LICENSE files in the repository root for full details.
     align-items: flex-start;
     font: var(--cpd-font-body-md-regular);
     margin-right: 6px;
-    background-color: var(--cpd-color-bg-subtle-secondary, rgba(255, 255, 255, 0.12));
-    border: 1.5px solid var(--cpd-color-border-interactive-secondary, rgba(255, 255, 255, 0.2));
+    background-color: #242938;
+    border: 2px solid #3d4455;
     border-radius: 12px;
     padding: 8px 12px;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
 
     &:focus-within {
-        border-color: rgba(99, 102, 241, 0.6);
-        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+        border-color: #6366f1;
+        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+
+    /* Light theme override */
+    .cpd-theme-light &,
+    :root[class*="light"] & {
+        background-color: #f1f5f9;
+        border-color: #cbd5e1;
+
+        &:focus-within {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+        }
     }
 
     pre {
