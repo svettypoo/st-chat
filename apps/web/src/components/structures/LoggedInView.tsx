@@ -52,6 +52,7 @@ import AudioFeedArrayForLegacyCall from "../views/voip/AudioFeedArrayForLegacyCa
 import { OwnProfileStore } from "../../stores/OwnProfileStore";
 import { UPDATE_EVENT } from "../../stores/AsyncStore";
 import { RoomView } from "./RoomView";
+import { MultiPaneLayout } from "./MultiPaneLayout";
 import ToastContainer from "./ToastContainer";
 import UserView from "./UserView";
 import { BackdropPanel } from "./BackdropPanel";
@@ -794,7 +795,12 @@ class LoggedInView extends React.Component<IProps, IState> {
             </div>
         );
 
-        const roomView = <div className="mx_RoomView_wrapper">{pageElement}</div>;
+        const roomView =
+            this.props.page_type === PageTypes.RoomView ? (
+                <MultiPaneLayout currentRoomId={this.props.currentRoomId} pageType={this.props.page_type} />
+            ) : (
+                <div className="mx_RoomView_wrapper">{pageElement}</div>
+            );
         const content =
             useNewRoomList && this.resizerViewModel ? (
                 <GroupView vm={this.resizerViewModel}>

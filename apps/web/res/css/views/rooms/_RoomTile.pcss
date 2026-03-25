@@ -6,6 +6,16 @@ SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Com
 Please see LICENSE files in the repository root for full details.
 */
 
+/* Drag wrapper — makes the entire tile draggable without breaking RovingTabIndex */
+.mx_RoomTile_dragWrapper {
+    display: contents;
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
 /* Note: the room tile expects to be in a flexbox column container */
 .mx_RoomTile {
     margin-bottom: 4px;
