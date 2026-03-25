@@ -42,29 +42,32 @@ Please see LICENSE files in the repository root for full details.
     }
 }
 
-.mx_MultiPaneLayout_toolbar {
+/* Layout switcher in SpacePanel sidebar */
+.mx_LayoutSwitcher {
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 4px;
-    padding: 4px 8px;
-    background-color: var(--cpd-color-bg-canvas-default, #15191e);
-    border-top: 1px solid var(--cpd-color-border-subtle, #2d3138);
-    flex-shrink: 0;
+    padding: 4px 0;
+    list-style: none;
 }
 
-.mx_MultiPaneLayout_layoutBtn {
+.mx_LayoutSwitcher_buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+}
+
+.mx_LayoutSwitcher_btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     border: 1px solid transparent;
     border-radius: 6px;
     background: none;
     color: var(--cpd-color-text-secondary, #9ba0a6);
     cursor: pointer;
-    font-size: 16px;
+    padding: 0;
     transition: background 0.1s ease, color 0.1s ease, border-color 0.1s ease;
 
     &:hover {

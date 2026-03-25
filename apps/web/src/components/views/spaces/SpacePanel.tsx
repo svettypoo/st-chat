@@ -79,6 +79,52 @@ import { Landmark, LandmarkNavigation } from "../../../accessibility/LandmarkNav
 import { KeyboardShortcut } from "../settings/KeyboardShortcut";
 import { ModuleApi } from "../../../modules/Api.ts";
 import { useModuleSpacePanelItems } from "../../../modules/ExtrasApi.ts";
+import { type LayoutMode, LAYOUT_CHANGE_EVENT } from "../../structures/MultiPaneLayout";
+
+const LAYOUT_STORAGE_KEY = "mx_MultiPaneLayout";
+
+const LayoutSwitcher: React.FC = () => {
+    const [layout, setLayout] = useState<LayoutMode>(() => {
+        try {
+            const raw = localStorage.getItem(LAYOUT_STORAGE_KEY);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                return (parsed.layout as LayoutMode) ?? "1";
+            }
+        } catch { /* ignore */ }
+        return "1";
+    });
+
+    const changeLayout = (newLayout: LayoutMode): void => {
+        setLayout(newLayout);
+        window.dispatchEvent(new CustomEvent(LAYOUT_CHANGE_EVENT, { detail: { layout: newLayout } }));
+    };
+
+    const layouts: { mode: LayoutMode; title: string; svg: JSX.Element }[] = [
+        { mode: "1", title: "Single pane", svg: <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="1" width="12" height="14" rx="1.5" /></svg> },
+        { mode: "2", title: "Two panes", svg: <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="14" rx="1.5" /><rect x="9" y="1" width="6" height="14" rx="1.5" /></svg> },
+        { mode: "3", title: "Three panes", svg: <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="0.5" y="1" width="4" height="14" rx="1" /><rect x="6" y="1" width="4" height="14" rx="1" /><rect x="11.5" y="1" width="4" height="14" rx="1" /></svg> },
+        { mode: "4", title: "Four panes", svg: <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="0.5" y="1" width="2.75" height="14" rx="0.75" /><rect x="4.75" y="1" width="2.75" height="14" rx="0.75" /><rect x="9" y="1" width="2.75" height="14" rx="0.75" /><rect x="13.25" y="1" width="2.75" height="14" rx="0.75" /></svg> },
+    ];
+
+    return (
+        <li className="mx_LayoutSwitcher" role="treeitem" aria-label="Layout switcher">
+            <div className="mx_LayoutSwitcher_buttons">
+                {layouts.map(({ mode, title, svg }) => (
+                    <button
+                        key={mode}
+                        className={classNames("mx_LayoutSwitcher_btn", { active: layout === mode })}
+                        onClick={() => changeLayout(mode)}
+                        title={title}
+                        aria-label={title}
+                    >
+                        {svg}
+                    </button>
+                ))}
+            </div>
+        </li>
+    );
+};
 
 const useSpaces = (): [Room[], MetaSpace[], Room[], SpaceKey] => {
     const invites = useEventEmitterState<Room[]>(SpaceStore.instance, UPDATE_INVITED_SPACES, () => {
@@ -327,6 +373,7 @@ const InnerSpacePanel = React.memo<IInnerSpacePanelProps>(
                 aria-label={_t("common|spaces")}
             >
                 {metaSpacesSection}
+                <LayoutSwitcher />
                 {invites.map((s) => (
                     <SpaceItem
                         key={s.roomId}

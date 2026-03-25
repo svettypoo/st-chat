@@ -9,7 +9,8 @@ import React from "react";
 import classNames from "classnames";
 import { PaneSlot } from "./PaneSlot";
 
-type LayoutMode = "1" | "2" | "3" | "4";
+export type LayoutMode = "1" | "2" | "3" | "4";
+export const LAYOUT_CHANGE_EVENT = "st-layout-change";
 
 interface Pane {
     roomId: string | null;
@@ -61,11 +62,23 @@ export class MultiPaneLayout extends React.Component<MultiPaneLayoutProps, Multi
         };
     }
 
+    public componentDidMount(): void {
+        window.addEventListener(LAYOUT_CHANGE_EVENT, this.onExternalLayoutChange as EventListener);
+    }
+
+    public componentWillUnmount(): void {
+        window.removeEventListener(LAYOUT_CHANGE_EVENT, this.onExternalLayoutChange as EventListener);
+    }
+
     public componentDidUpdate(prevProps: MultiPaneLayoutProps): void {
         if (prevProps.currentRoomId !== this.props.currentRoomId && this.props.currentRoomId) {
             this.setRoomInActivePane(this.props.currentRoomId);
         }
     }
+
+    private onExternalLayoutChange = (e: CustomEvent<{ layout: LayoutMode }>): void => {
+        this.setLayout(e.detail.layout);
+    };
 
     private setRoomInActivePane(roomId: string): void {
         const panes = [...this.state.panes];
@@ -138,54 +151,6 @@ export class MultiPaneLayout extends React.Component<MultiPaneLayoutProps, Multi
                             onSelectRoom={this.onDropRoom}
                         />
                     ))}
-                </div>
-                <div className="mx_MultiPaneLayout_toolbar">
-                    <button
-                        className={classNames("mx_MultiPaneLayout_layoutBtn", { active: layout === "1" })}
-                        onClick={() => this.setLayout("1")}
-                        title="Single pane"
-                        aria-label="Single pane layout"
-                    >
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <rect x="2" y="1" width="12" height="14" rx="1.5" />
-                        </svg>
-                    </button>
-                    <button
-                        className={classNames("mx_MultiPaneLayout_layoutBtn", { active: layout === "2" })}
-                        onClick={() => this.setLayout("2")}
-                        title="Two panes side by side"
-                        aria-label="Two pane layout"
-                    >
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <rect x="1" y="1" width="6" height="14" rx="1.5" />
-                            <rect x="9" y="1" width="6" height="14" rx="1.5" />
-                        </svg>
-                    </button>
-                    <button
-                        className={classNames("mx_MultiPaneLayout_layoutBtn", { active: layout === "3" })}
-                        onClick={() => this.setLayout("3")}
-                        title="Three panes side by side"
-                        aria-label="Three pane layout"
-                    >
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <rect x="0.5" y="1" width="4" height="14" rx="1" />
-                            <rect x="6" y="1" width="4" height="14" rx="1" />
-                            <rect x="11.5" y="1" width="4" height="14" rx="1" />
-                        </svg>
-                    </button>
-                    <button
-                        className={classNames("mx_MultiPaneLayout_layoutBtn", { active: layout === "4" })}
-                        onClick={() => this.setLayout("4")}
-                        title="Four panes side by side"
-                        aria-label="Four pane layout"
-                    >
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <rect x="0.5" y="1" width="2.75" height="14" rx="0.75" />
-                            <rect x="4.75" y="1" width="2.75" height="14" rx="0.75" />
-                            <rect x="9" y="1" width="2.75" height="14" rx="0.75" />
-                            <rect x="13.25" y="1" width="2.75" height="14" rx="0.75" />
-                        </svg>
-                    </button>
                 </div>
             </div>
         );
