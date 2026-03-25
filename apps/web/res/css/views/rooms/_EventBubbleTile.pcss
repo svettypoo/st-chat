@@ -74,7 +74,7 @@ Please see LICENSE files in the repository root for full details.
 
     &:hover {
         .mx_EventTile_avatar {
-            border-color: $eventbubble-bg-hover;
+            border-color: rgba(99, 102, 241, 0.3);
         }
     }
 
@@ -97,12 +97,14 @@ Please see LICENSE files in the repository root for full details.
     &:hover,
     &.mx_EventTile_selected {
         &::before {
-            background: $eventbubble-bg-hover;
+            /* Subtle indigo aura on bubble hover instead of solid gray */
+            background: rgba(99, 102, 241, 0.06);
+            box-shadow: 0 0 16px rgba(99, 102, 241, 0.1);
         }
 
         .mx_EventTile_avatar {
             img {
-                box-shadow: 0 0 0 3px $eventbubble-bg-hover;
+                box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
             }
         }
     }
@@ -212,7 +214,8 @@ Please see LICENSE files in the repository root for full details.
             justify-content: flex-start;
         }
 
-        --backgroundColor: $eventbubble-others-bg;
+        /* Received messages: use the subtle secondary surface color */
+        --backgroundColor: var(--cpd-color-bg-subtle-secondary);
     }
 
     &[data-self="true"] {
@@ -267,14 +270,16 @@ Please see LICENSE files in the repository root for full details.
         }
 
         .mx_MediaBody {
-            background: $eventbubble-self-bg;
+            /* Sent media: indigo tint to match bubble gradient */
+            background: rgba(99, 102, 241, 0.2);
         }
 
         .mx_MessageActionBar {
             inset-inline-end: 0;
         }
 
-        --backgroundColor: $eventbubble-self-bg;
+        /* Sent messages: indigo gradient background */
+        --backgroundColor: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(129, 140, 248, 0.18) 100%);
     }
 
     .mx_EventTile_line {

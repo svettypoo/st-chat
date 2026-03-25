@@ -36,6 +36,23 @@ Please see LICENSE files in the repository root for full details.
         border-radius: 8px;
     }
 
+    /* Subtle lift effect on hover — makes tiles feel draggable */
+    &:hover,
+    &:focus-within {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    /* Active room: left indigo border + subtle indigo background tint */
+    &.mx_RoomTile_selected {
+        border-left: 3px solid rgba(99, 102, 241, 0.8);
+        padding-left: 1px; /* compensate for border so text doesn't shift */
+        background-color: rgba(99, 102, 241, 0.08);
+        box-shadow: none;
+        transform: none;
+    }
+
     .mx_DecoratedRoomAvatar,
     .mx_RoomTile_avatarContainer {
         margin-right: 10px;

@@ -224,7 +224,10 @@ $left-gutter: 64px;
 
         &:hover {
             .mx_EventTile_line {
-                background-color: $event-selected-color;
+                /* Replace solid gray hover with subtle indigo aura glow */
+                background-color: transparent;
+                box-shadow: 0 0 16px rgba(99, 102, 241, 0.12);
+                border-radius: 8px;
             }
         }
     }
