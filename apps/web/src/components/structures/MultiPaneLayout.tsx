@@ -9,7 +9,7 @@ import React from "react";
 import classNames from "classnames";
 import { PaneSlot } from "./PaneSlot";
 
-type LayoutMode = "1" | "2h" | "4";
+type LayoutMode = "1" | "2" | "3" | "4";
 
 interface Pane {
     roomId: string | null;
@@ -50,15 +50,18 @@ export class MultiPaneLayout extends React.Component<MultiPaneLayoutProps, Multi
     public constructor(props: MultiPaneLayoutProps) {
         super(props);
         const saved = loadFromStorage();
+        // Migrate old "2h" -> "2" from saved state
+        let savedLayout = saved.layout as string | undefined;
+        if (savedLayout === "2h") savedLayout = "2";
+        const layout = (savedLayout as LayoutMode) ?? "1";
         this.state = {
             panes: saved.panes ?? [{ roomId: props.currentRoomId }],
             activePaneIndex: saved.activePaneIndex ?? 0,
-            layout: saved.layout ?? "1",
+            layout,
         };
     }
 
     public componentDidUpdate(prevProps: MultiPaneLayoutProps): void {
-        // When the active room changes from the room list, put it in the active pane
         if (prevProps.currentRoomId !== this.props.currentRoomId && this.props.currentRoomId) {
             this.setRoomInActivePane(this.props.currentRoomId);
         }
@@ -90,22 +93,23 @@ export class MultiPaneLayout extends React.Component<MultiPaneLayoutProps, Multi
         this.setState({ panes, activePaneIndex: index }, this.persist);
     };
 
+    private getPaneCount(layout: LayoutMode = this.state.layout): number {
+        if (layout === "1") return 1;
+        if (layout === "2") return 2;
+        if (layout === "3") return 3;
+        return 4;
+    }
+
     private setLayout = (layout: LayoutMode): void => {
         let panes = [...this.state.panes];
-        const targetCount = layout === "1" ? 1 : layout === "2h" ? 2 : 4;
+        const targetCount = this.getPaneCount(layout);
 
-        // Grow or shrink pane array
         while (panes.length < targetCount) panes.push({ roomId: null });
         if (panes.length > targetCount) panes = panes.slice(0, targetCount);
 
         const activePaneIndex = Math.min(this.state.activePaneIndex, targetCount - 1);
         this.setState({ layout, panes, activePaneIndex }, this.persist);
     };
-
-    private getPaneCount(): number {
-        const { layout } = this.state;
-        return layout === "1" ? 1 : layout === "2h" ? 2 : 4;
-    }
 
     public render(): React.ReactNode {
         const { panes, activePaneIndex, layout } = this.state;
@@ -114,7 +118,8 @@ export class MultiPaneLayout extends React.Component<MultiPaneLayoutProps, Multi
 
         const gridClass = classNames("mx_MultiPaneLayout_grid", {
             "mx_MultiPaneLayout_grid--1": layout === "1",
-            "mx_MultiPaneLayout_grid--2h": layout === "2h",
+            "mx_MultiPaneLayout_grid--2": layout === "2",
+            "mx_MultiPaneLayout_grid--3": layout === "3",
             "mx_MultiPaneLayout_grid--4": layout === "4",
         });
 
@@ -130,6 +135,7 @@ export class MultiPaneLayout extends React.Component<MultiPaneLayoutProps, Multi
                             onActivate={this.onActivatePane}
                             onClose={this.onClosePane}
                             onDrop={this.onDropRoom}
+                            onSelectRoom={this.onDropRoom}
                         />
                     ))}
                 </div>
@@ -143,20 +149,28 @@ export class MultiPaneLayout extends React.Component<MultiPaneLayoutProps, Multi
                         ▣
                     </button>
                     <button
-                        className={classNames("mx_MultiPaneLayout_layoutBtn", { active: layout === "2h" })}
-                        onClick={() => this.setLayout("2h")}
+                        className={classNames("mx_MultiPaneLayout_layoutBtn", { active: layout === "2" })}
+                        onClick={() => this.setLayout("2")}
                         title="Two panes side by side"
                         aria-label="Two pane layout"
                     >
                         ⊟
                     </button>
                     <button
-                        className={classNames("mx_MultiPaneLayout_layoutBtn", { active: layout === "4" })}
-                        onClick={() => this.setLayout("4")}
-                        title="Four panes (2×2)"
-                        aria-label="Four pane layout"
+                        className={classNames("mx_MultiPaneLayout_layoutBtn", { active: layout === "3" })}
+                        onClick={() => this.setLayout("3")}
+                        title="Three panes side by side"
+                        aria-label="Three pane layout"
                     >
                         ⊞
+                    </button>
+                    <button
+                        className={classNames("mx_MultiPaneLayout_layoutBtn", { active: layout === "4" })}
+                        onClick={() => this.setLayout("4")}
+                        title="Four panes side by side"
+                        aria-label="Four pane layout"
+                    >
+                        ▦
                     </button>
                 </div>
             </div>

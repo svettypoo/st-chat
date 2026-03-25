@@ -26,14 +26,19 @@ Please see LICENSE files in the repository root for full details.
         grid-template-rows: 1fr;
     }
 
-    &.mx_MultiPaneLayout_grid--2h {
+    &.mx_MultiPaneLayout_grid--2 {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
     }
 
+    &.mx_MultiPaneLayout_grid--3 {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+
     &.mx_MultiPaneLayout_grid--4 {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
     }
 }
 
@@ -163,13 +168,22 @@ Please see LICENSE files in the repository root for full details.
 }
 
 .mx_PaneSlot_emptyState {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 8px;
     color: var(--cpd-color-text-disabled, #555b67);
-    pointer-events: none;
+    cursor: pointer;
+    padding: 24px;
+    border-radius: 8px;
+    transition: background 0.15s ease;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.04);
+        color: var(--cpd-color-text-secondary, #9ba0a6);
+    }
 }
 
 .mx_PaneSlot_emptyIcon {
@@ -180,5 +194,72 @@ Please see LICENSE files in the repository root for full details.
 .mx_PaneSlot_emptyText {
     font-size: 13px;
     margin: 0;
-    opacity: 0.6;
+    font-weight: 600;
+}
+
+.mx_PaneSlot_emptyHint {
+    font-size: 11px;
+    margin: 0;
+    opacity: 0.5;
+}
+
+/* Room search popup inside empty pane */
+.mx_PaneSlot_searchPopup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(280px, 90%);
+    background-color: var(--cpd-color-bg-canvas-default, #15191e);
+    border: 1px solid rgba(99, 102, 241, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.mx_PaneSlot_searchInput {
+    width: 100%;
+    padding: 10px 12px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--cpd-color-border-subtle, #2d3138);
+    color: var(--cpd-color-text-primary, #e3e8f0);
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+
+    &::placeholder {
+        color: var(--cpd-color-text-disabled, #555b67);
+    }
+}
+
+.mx_PaneSlot_searchResults {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.mx_PaneSlot_searchItem {
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--cpd-color-text-primary, #e3e8f0);
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background 0.1s ease;
+
+    &:hover {
+        background-color: rgba(99, 102, 241, 0.15);
+        color: #818cf8;
+    }
+}
+
+.mx_PaneSlot_searchEmpty {
+    padding: 12px;
+    font-size: 13px;
+    color: var(--cpd-color-text-disabled, #555b67);
+    text-align: center;
 }
