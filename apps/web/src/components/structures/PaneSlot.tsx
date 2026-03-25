@@ -5,10 +5,10 @@ SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Com
 Please see LICENSE files in the repository root for full details.
 */
 
-import React from "react";
+import React, { Suspense } from "react";
 import classNames from "classnames";
 import { MatrixClientPeg } from "../../MatrixClientPeg";
-import { RoomView } from "./RoomView";
+const LazyRoomView = React.lazy(() => import("./RoomView").then((m) => ({ default: m.RoomView })));
 
 interface PaneSlotProps {
     roomId: string | null;
@@ -181,13 +181,15 @@ export class PaneSlot extends React.PureComponent<PaneSlotProps, PaneSlotState> 
                             </button>
                         </div>
                         <div className="mx_PaneSlot_content">
-                            <RoomView
-                                key={roomId}
-                                roomId={roomId}
-                                hideHeader={true}
-                                hideRightPanel={true}
-                                enableReadReceiptsAndMarkersOnActivity={isActive}
-                            />
+                            <Suspense fallback={<div/>}>
+                                <LazyRoomView
+                                    key={roomId}
+                                    roomId={roomId}
+                                    hideHeader={true}
+                                    hideRightPanel={true}
+                                    enableReadReceiptsAndMarkersOnActivity={isActive}
+                                />
+                            </Suspense>
                         </div>
                     </>
                 ) : (

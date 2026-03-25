@@ -51,7 +51,7 @@ import LegacyCallHandler, { LegacyCallHandlerEvent } from "../../LegacyCallHandl
 import AudioFeedArrayForLegacyCall from "../views/voip/AudioFeedArrayForLegacyCall";
 import { OwnProfileStore } from "../../stores/OwnProfileStore";
 import { UPDATE_EVENT } from "../../stores/AsyncStore";
-import { RoomView } from "./RoomView";
+const RoomView = React.lazy(() => import("./RoomView").then((m) => ({ default: m.RoomView })));
 import { MultiPaneLayout } from "./MultiPaneLayout";
 import ToastContainer from "./ToastContainer";
 import UserView from "./UserView";
