@@ -169,17 +169,14 @@ export class PaneSlot extends React.PureComponent<PaneSlotProps, PaneSlotState> 
             >
                 {roomId ? (
                     <>
-                        <div className="mx_PaneSlot_header">
-                            <span className="mx_PaneSlot_roomName">{this.getRoomName()}</span>
-                            <button
-                                className="mx_PaneSlot_closeButton"
-                                onClick={this.onClose}
-                                aria-label="Close pane"
-                                title="Close pane"
-                            >
-                                ×
-                            </button>
-                        </div>
+                        <button
+                            className="mx_PaneSlot_closeButton"
+                            onClick={this.onClose}
+                            aria-label="Close pane"
+                            title="Close pane"
+                        >
+                            ×
+                        </button>
                         <div className="mx_PaneSlot_content">
                             <Suspense fallback={<div/>}>
                                 <LazyRoomView

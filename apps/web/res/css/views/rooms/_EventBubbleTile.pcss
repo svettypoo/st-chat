@@ -281,8 +281,16 @@ Please see LICENSE files in the repository root for full details.
             inset-inline-end: 0;
         }
 
-        /* Sent messages: solid indigo with higher opacity for better contrast */
-        --backgroundColor: rgba(99, 102, 241, 0.4);
+        /* Sent messages: solid indigo — high contrast in both light and dark */
+        --backgroundColor: #4f46e5;
+        color: #ffffff;
+
+        /* Ensure all text inside sent bubbles is white */
+        .mx_EventTile_body,
+        .mx_EventTile_content,
+        a {
+            color: #ffffff !important;
+        }
     }
 
     .mx_EventTile_line {

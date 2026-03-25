@@ -84,6 +84,7 @@ Please see LICENSE files in the repository root for full details.
 
 /* PaneSlot */
 .mx_PaneSlot {
+    position: relative;
     display: flex;
     flex-direction: column;
     min-width: 0;
@@ -98,6 +99,16 @@ Please see LICENSE files in the repository root for full details.
     &.mx_PaneSlot--active {
         box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.4), 0 0 12px rgba(99, 102, 241, 0.15);
         border-color: rgba(99, 102, 241, 0.4);
+        animation: paneGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes paneGlow {
+        0% {
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3), 0 0 8px rgba(99, 102, 241, 0.1);
+        }
+        100% {
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5), 0 0 18px rgba(99, 102, 241, 0.25);
+        }
     }
 
     &.mx_PaneSlot--dragOver {
@@ -112,47 +123,33 @@ Please see LICENSE files in the repository root for full details.
     }
 }
 
-.mx_PaneSlot_header {
-    display: flex;
-    align-items: center;
-    padding: 4px 8px;
-    background-color: var(--cpd-color-bg-subtle-primary, #1e2228);
-    border-bottom: 1px solid var(--cpd-color-border-subtle, #2d3138);
-    flex-shrink: 0;
-    min-height: 32px;
-}
-
-.mx_PaneSlot_roomName {
-    flex: 1;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--cpd-color-text-primary, #e3e8f0);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 .mx_PaneSlot_closeButton {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border: none;
-    border-radius: 4px;
-    background: none;
-    color: var(--cpd-color-text-secondary, #9ba0a6);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1;
-    flex-shrink: 0;
-    margin-left: 4px;
     padding: 0;
-    transition: background 0.1s ease, color 0.1s ease;
+    opacity: 0;
+    transition: opacity 0.15s ease, background 0.1s ease;
+
+    .mx_PaneSlot:hover & {
+        opacity: 1;
+    }
 
     &:hover {
-        background-color: var(--cpd-color-bg-critical-subtle, rgba(239, 68, 68, 0.15));
-        color: #f87171;
+        background: rgba(239, 68, 68, 0.8);
     }
 }
 
