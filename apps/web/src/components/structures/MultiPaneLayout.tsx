@@ -8,6 +8,7 @@ Please see LICENSE files in the repository root for full details.
 import React from "react";
 import classNames from "classnames";
 import { PaneSlot } from "./PaneSlot";
+import { MatrixClientPeg } from "../../../MatrixClientPeg";
 
 export type LayoutMode = "1" | "2" | "3" | "4";
 export const LAYOUT_CHANGE_EVENT = "st-layout-change";
@@ -113,11 +114,40 @@ export class MultiPaneLayout extends React.Component<MultiPaneLayoutProps, Multi
         return 4;
     }
 
+    private getNextRecentRoom(currentPanes: Pane[]): string | null {
+        try {
+            const client = MatrixClientPeg.safeGet();
+            const rooms = client.getVisibleRooms();
+
+            // Sort by most recent activity
+            rooms.sort((a, b) => {
+                const tsA = a.getLastActiveTimestamp();
+                const tsB = b.getLastActiveTimestamp();
+                return tsB - tsA;
+            });
+
+            // Find first room not already in a pane
+            const usedRoomIds = new Set(currentPanes.map((p) => p.roomId).filter(Boolean));
+            for (const room of rooms) {
+                if (!usedRoomIds.has(room.roomId)) {
+                    return room.roomId;
+                }
+            }
+        } catch {
+            // fallback to null if client not available
+        }
+        return null;
+    }
+
     private setLayout = (layout: LayoutMode): void => {
         let panes = [...this.state.panes];
         const targetCount = this.getPaneCount(layout);
 
-        while (panes.length < targetCount) panes.push({ roomId: null });
+        // Get recent rooms to auto-fill new panes
+        while (panes.length < targetCount) {
+            const recentRoom = this.getNextRecentRoom(panes);
+            panes.push({ roomId: recentRoom });
+        }
         if (panes.length > targetCount) panes = panes.slice(0, targetCount);
 
         const activePaneIndex = Math.min(this.state.activePaneIndex, targetCount - 1);

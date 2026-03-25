@@ -30,22 +30,9 @@ const onReject = (): void => {
 
 const TOAST_KEY = "desktopnotifications";
 
-export const showToast = (fromMessageSend: boolean): void => {
-    ToastStore.sharedInstance().addOrReplaceToast({
-        key: TOAST_KEY,
-        title: fromMessageSend
-            ? _t("notifications|enable_prompt_toast_title_from_message_send")
-            : _t("notifications|enable_prompt_toast_title"),
-        props: {
-            description: _t("notifications|enable_prompt_toast_description"),
-            primaryLabel: _t("action|enable"),
-            onPrimaryClick: onAccept,
-            secondaryLabel: _t("action|dismiss"),
-            onSecondaryClick: onReject,
-        },
-        component: GenericToast,
-        priority: 30,
-    });
+export const showToast = (_fromMessageSend: boolean): void => {
+    // Suppressed: the "Enable desktop notifications" banner is hidden by design.
+    // Users can enable notifications via Settings > Notifications.
 };
 
 export const hideToast = (): void => {
