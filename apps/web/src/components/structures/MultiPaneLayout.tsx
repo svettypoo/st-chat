@@ -8,7 +8,7 @@ Please see LICENSE files in the repository root for full details.
 import React from "react";
 import classNames from "classnames";
 import { PaneSlot } from "./PaneSlot";
-import { MatrixClientPeg } from "../../../MatrixClientPeg";
+import { MatrixClientPeg } from "../../MatrixClientPeg";
 
 export type LayoutMode = "1" | "2" | "3" | "4";
 export const LAYOUT_CHANGE_EVENT = "st-layout-change";
