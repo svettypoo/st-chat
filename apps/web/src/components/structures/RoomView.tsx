@@ -1294,6 +1294,7 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
 
             case Action.ComposerInsert: {
                 if (payload.composerType) break;
+                if (payload.roomId && payload.roomId !== this.state.room?.roomId) break;
 
                 let timelineRenderingType: TimelineRenderingType = payload.timelineRenderingType;
                 // ThreadView handles Action.ComposerInsert itself due to it having its own editState
