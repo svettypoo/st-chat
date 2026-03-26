@@ -7,11 +7,17 @@ Please see LICENSE files in the repository root for full details.
 */
 
 .mx_RoomHeader {
+    /* S&T: Card-style header */
+    margin: 8px 12px 0 12px;
+    border-radius: 12px;
+    border-bottom: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+    background-color: var(--cpd-color-bg-canvas-default, $background);
+    z-index: 1;
     height: 64px;
     box-sizing: border-box;
     padding: 0 var(--cpd-space-3x) 0 calc(var(--cpd-space-3x) + var(--cpd-space-1-5x));
-    border-bottom: 1px solid $separator;
-    background-color: $background;
+    /* background set by card style above */
     transition: all 0.2s ease;
 
     button:has(svg.mx_RoomHeader_toggled) {
