@@ -530,7 +530,7 @@ export class MessageComposer extends React.Component<IProps, IState> {
     public render(): React.ReactNode {
         let leftIcon: false | JSX.Element = false;
         if (!this.state.isWysiwygLabEnabled) {
-            if (!this.props.e2eStatus) {
+            if (!this.props.e2eStatus) { leftIcon = false; } else if (false && !this.props.e2eStatus) {
                 leftIcon = (
                     <div className="mx_MessageComposer_e2eIconWrapper">
                         <Tooltip label={_t("composer|room_unencrypted")}>

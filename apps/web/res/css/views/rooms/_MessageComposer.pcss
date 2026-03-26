@@ -7,6 +7,19 @@ Please see LICENSE files in the repository root for full details.
 */
 
 .mx_MessageComposer_wrapper {
+    &::before {
+        content: "";
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        top: 8px;
+        bottom: 8px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        pointer-events: none;
+        z-index: 0;
+    }
     vertical-align: middle;
     margin: auto;
     border-top: 1px solid $primary-hairline-color;
@@ -188,6 +201,19 @@ Please see LICENSE files in the repository root for full details.
 }
 .mx_MessageComposer_wysiwyg {
     .mx_MessageComposer_wrapper {
+    &::before {
+        content: "";
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        top: 8px;
+        bottom: 8px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        pointer-events: none;
+        z-index: 0;
+    }
         padding-left: 16px;
         margin-top: 6px;
         margin-bottom: 12px;
@@ -269,6 +295,19 @@ Please see LICENSE files in the repository root for full details.
     margin-right: 0;
 
     .mx_MessageComposer_wrapper {
+    &::before {
+        content: "";
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        top: 8px;
+        bottom: 8px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        pointer-events: none;
+        z-index: 0;
+    }
         padding: 0 0 0 25px;
     }
 
@@ -278,6 +317,19 @@ Please see LICENSE files in the repository root for full details.
 
     &:not(.mx_MessageComposer_e2eStatus) {
         .mx_MessageComposer_wrapper {
+    &::before {
+        content: "";
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        top: 8px;
+        bottom: 8px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        pointer-events: none;
+        z-index: 0;
+    }
             padding: 0;
         }
     }
