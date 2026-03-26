@@ -1,247 +1,27 @@
-/* S&T Chat Theme Overrides — WhatsApp-inspired design by Gemini */
+/* S&T Chat Theme Overrides — WhatsApp-inspired (Gemini design) */
+/* Using flat selectors — no nesting */
 
-/* ============================================ */
-/* LIGHT THEME                                  */
-/* ============================================ */
-.cpd-theme-light {
-    /* 1. SIDEBAR */
-    .mx_LeftPanel {
-        background-color: #F0F2F5;
-    }
+/* ===== LIGHT THEME ===== */
+.cpd-theme-light .mx_LeftPanel { background-color: #EDEFF1 !important; border-right: 1px solid #E0E0E0; }
+.cpd-theme-light .mx_RoomView_messagePanel { background-color: #E5DDD5 !important; background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E"); background-repeat: repeat; }
+.cpd-theme-light .mx_RoomHeader { background: #FFFFFF !important; box-shadow: 0 1px 2px rgba(0,0,0,0.08); border-bottom: none !important; }
+.cpd-theme-light .mx_MessageComposer_wrapper { background-color: #EDEFF1 !important; padding: 8px 16px; box-shadow: 0 -1px 2px rgba(0,0,0,0.08); border-top: none !important; }
+.cpd-theme-light .mx_BasicMessageComposer .mx_BasicMessageComposer_input { background: #FFFFFF !important; border: 1px solid #E0E0E0 !important; border-radius: 20px !important; padding: 8px 16px !important; min-height: 40px; }
+.cpd-theme-light .mx_EventTile[data-self="true"] .mx_EventTile_line { background-color: rgba(217, 253, 211, 0.5); border-radius: 8px; padding: 4px 8px; margin: 2px 0; }
+.cpd-theme-light .mx_EventTile:not([data-self="true"]) .mx_EventTile_line { background-color: rgba(255, 255, 255, 0.7); border-radius: 8px; padding: 4px 8px; margin: 2px 0; }
 
-    /* 2. CHAT TIMELINE */
-    .mx_RoomView_messagePanel {
-        background-color: #EAE6DF;
-        background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
-        background-repeat: repeat;
-    }
+/* ===== DARK THEME ===== */
+.cpd-theme-dark .mx_LeftPanel { background-color: #171F26 !important; border-right: 1px solid #333D44; }
+.cpd-theme-dark .mx_RoomView_messagePanel { background-color: #0B141A !important; background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E"); background-repeat: repeat; }
+.cpd-theme-dark .mx_RoomHeader { background: #1F2C34 !important; box-shadow: 0 1px 2px rgba(0,0,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.06) !important; }
+.cpd-theme-dark .mx_MessageComposer_wrapper { background-color: #1F2C34 !important; padding: 8px 16px; box-shadow: 0 -1px 2px rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.06) !important; }
+.cpd-theme-dark .mx_BasicMessageComposer .mx_BasicMessageComposer_input { background: #2A3942 !important; border: 1px solid #333D44 !important; border-radius: 20px !important; padding: 8px 16px !important; min-height: 40px; }
+.cpd-theme-dark .mx_EventTile[data-self="true"] .mx_EventTile_line { background-color: rgba(0, 92, 75, 0.15); border-radius: 8px; padding: 4px 8px; margin: 2px 0; }
+.cpd-theme-dark .mx_EventTile:not([data-self="true"]) .mx_EventTile_line { background-color: rgba(42, 57, 66, 0.4); border-radius: 8px; padding: 4px 8px; margin: 2px 0; }
 
-    /* 3. ROOM HEADER — card style */
-    .mx_RoomHeader {
-        background: #FFFFFF;
-        height: 60px;
-        padding: 0 16px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-        border-radius: 0;
-        margin: 0;
-        border-bottom: none;
-    }
-
-    /* 4. COMPOSER wrapper */
-    .mx_MessageComposer_wrapper {
-        background-color: #F0F2F5;
-        padding: 8px 16px;
-        box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.08);
-        border-top: none;
-    }
-
-    /* 5. TEXT INPUT — rounded pill */
-    .mx_BasicMessageComposer .mx_BasicMessageComposer_input {
-        background: #FFFFFF;
-        border: 1px solid #E0E0E0;
-        border-radius: 20px;
-        padding: 8px 16px;
-        min-height: 40px;
-        box-sizing: border-box;
-    }
-
-    /* 6. SENT BUBBLES */
-    .mx_EventTile[data-layout="bubble"][data-self="true"] .mx_EventTile_content {
-        background-color: #D9FDD3;
-        border-radius: 8px 8px 0 8px;
-    }
-
-    /* 7. RECEIVED BUBBLES */
-    .mx_EventTile[data-layout="bubble"][data-self="false"] .mx_EventTile_content {
-        background-color: #FFFFFF;
-        border-radius: 8px 8px 8px 0;
-    }
-
-    /* 8. SEPARATOR */
-    .mx_LeftPanel {
-        border-right: 1px solid #E0E0E0;
-    }
-}
-
-/* ============================================ */
-/* DARK THEME                                   */
-/* ============================================ */
-.cpd-theme-dark {
-    /* 1. SIDEBAR */
-    .mx_LeftPanel {
-        background-color: #202C33;
-    }
-
-    /* 2. CHAT TIMELINE */
-    .mx_RoomView_messagePanel {
-        background-color: #111B21;
-        background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
-        background-repeat: repeat;
-    }
-
-    /* 3. ROOM HEADER — card style */
-    .mx_RoomHeader {
-        background: #202C33;
-        height: 60px;
-        padding: 0 16px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        border-radius: 0;
-        margin: 0;
-        border-bottom: none;
-    }
-
-    /* 4. COMPOSER wrapper */
-    .mx_MessageComposer_wrapper {
-        background-color: #202C33;
-        padding: 8px 16px;
-        box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
-        border-top: none;
-    }
-
-    /* 5. TEXT INPUT — rounded pill */
-    .mx_BasicMessageComposer .mx_BasicMessageComposer_input {
-        background: #2A3942;
-        border: 1px solid #333D44;
-        border-radius: 20px;
-        padding: 8px 16px;
-        min-height: 40px;
-        box-sizing: border-box;
-    }
-
-    /* 6. SENT BUBBLES */
-    .mx_EventTile[data-layout="bubble"][data-self="true"] .mx_EventTile_content {
-        background-color: #005C4B;
-        border-radius: 8px 8px 0 8px;
-    }
-
-    /* 7. RECEIVED BUBBLES */
-    .mx_EventTile[data-layout="bubble"][data-self="false"] .mx_EventTile_content {
-        background-color: #2A3942;
-        border-radius: 8px 8px 8px 0;
-    }
-
-    /* 8. SEPARATOR */
-    .mx_LeftPanel {
-        border-right: 1px solid #333D44;
-    }
-}
-
-/* ============================================ */
-/* ROOM HEADER — WhatsApp-style contact card    */
-/* ============================================ */
-
-/* Larger avatar in header */
-.mx_RoomHeader .mx_BaseAvatar {
-    width: 40px !important;
-    height: 40px !important;
-    flex-shrink: 0;
-}
-.mx_RoomHeader .mx_BaseAvatar img,
-.mx_RoomHeader .mx_BaseAvatar span {
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 50% !important;
-}
-
-/* Room name + topic as two lines */
-.mx_RoomHeader_heading {
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    line-height: 1.3;
-}
-
-/* Subtitle / topic under room name */
-.mx_RoomHeader_truncated:not(.mx_RoomHeader_heading) {
-    font-size: 13px !important;
-    opacity: 0.7;
-    font-weight: 400 !important;
-}
-
-/* Hover effect — subtle highlight like WhatsApp */
-.mx_RoomHeader:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-}
-.cpd-theme-dark .mx_RoomHeader:hover {
-    background-color: rgba(255, 255, 255, 0.04);
-}
-
-/* Cursor pointer on entire header to show it's clickable */
-.mx_RoomHeader {
-    cursor: pointer;
-}
-
-/* ============================================ */
-/* FIX: Style Group layout messages (default)   */
-/* Bubble layout selectors don't apply in Group */
-/* ============================================ */
-
-/* Group layout — sent messages: subtle background */
-.cpd-theme-dark .mx_EventTile[data-self="true"] .mx_EventTile_line {
-    background-color: rgba(0, 92, 75, 0.15);
-    border-radius: 8px;
-    padding: 4px 8px;
-    margin: 2px 0;
-}
-.cpd-theme-light .mx_EventTile[data-self="true"] .mx_EventTile_line {
-    background-color: rgba(217, 253, 211, 0.5);
-    border-radius: 8px;
-    padding: 4px 8px;
-    margin: 2px 0;
-}
-
-/* Group layout — received messages: subtle card */
-.cpd-theme-dark .mx_EventTile:not([data-self="true"]) .mx_EventTile_line {
-    background-color: rgba(42, 57, 66, 0.4);
-    border-radius: 8px;
-    padding: 4px 8px;
-    margin: 2px 0;
-}
-.cpd-theme-light .mx_EventTile:not([data-self="true"]) .mx_EventTile_line {
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 8px;
-    padding: 4px 8px;
-    margin: 2px 0;
-}
-
-/* ============================================ */
-/* Hide browser unsupported banner              */
-/* ============================================ */
-.mx_SupportedBrowserBanner {
-    display: none !important;
-}
-
-/* ============================================ */
-/* Stronger zone contrast                       */
-/* ============================================ */
-
-/* Dark: make sidebar even darker, timeline lighter */
-.cpd-theme-dark .mx_LeftPanel {
-    background-color: #171F26 !important;
-}
-.cpd-theme-dark .mx_RoomView_messagePanel {
-    background-color: #0B141A !important;
-}
-.cpd-theme-dark .mx_RoomHeader {
-    background-color: #1F2C34 !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
-}
-.cpd-theme-dark .mx_MessageComposer_wrapper {
-    background-color: #1F2C34 !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
-}
-
-/* Light: sidebar cooler gray, timeline warmer */
-.cpd-theme-light .mx_LeftPanel {
-    background-color: #EDEFF1 !important;
-}
-.cpd-theme-light .mx_RoomView_messagePanel {
-    background-color: #E5DDD5 !important;
-}
-.cpd-theme-light .mx_RoomHeader {
-    background-color: #FFFFFF !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
-}
-.cpd-theme-light .mx_MessageComposer_wrapper {
-    background-color: #EDEFF1 !important;
-    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
-}
+/* ===== SHARED ===== */
+.mx_SupportedBrowserBanner { display: none !important; }
+.mx_RoomHeader .mx_BaseAvatar { width: 40px !important; height: 40px !important; }
+.mx_RoomHeader .mx_BaseAvatar img, .mx_RoomHeader .mx_BaseAvatar span { width: 40px !important; height: 40px !important; border-radius: 50% !important; }
+.mx_RoomHeader_heading { font-size: 16px !important; font-weight: 600 !important; }
+.mx_RoomHeader { cursor: pointer; }
