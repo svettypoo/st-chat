@@ -121,6 +121,8 @@ export class RoomListViewModel
     public onToggleFilter = (filterId: FilterId): void => {
         if (filterId === "all") {
             this.activeFilter = undefined;
+            this.roomsResult = RoomListStoreV3.instance.getSortedRoomsInActiveSpace(undefined);
+            this.updateRoomsMap(this.roomsResult);
             // Trigger refresh with no filter
             this.updateRoomListData();
             return;
