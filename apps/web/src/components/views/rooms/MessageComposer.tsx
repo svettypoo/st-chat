@@ -385,6 +385,7 @@ export class MessageComposer extends React.Component<IProps, IState> {
         dis.dispatch<ComposerInsertPayload>({
             action: Action.ComposerInsert,
             text: emoji,
+            roomId: this.props.room.roomId,
             timelineRenderingType: this.context.timelineRenderingType,
         });
         return true;

@@ -542,6 +542,7 @@ export class SendMessageComposer extends React.Component<ISendMessageComposerPro
                 break;
             case Action.ComposerInsert:
                 if (payload.timelineRenderingType !== this.context.timelineRenderingType) break;
+                if (payload.roomId && payload.roomId !== this.props.room.roomId) break;
                 if (payload.composerType !== ComposerType.Send) break;
 
                 if (payload.userId) {

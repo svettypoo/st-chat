@@ -1767,7 +1767,7 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
                 action: Action.ViewRoom,
                 room_id: this.getRoomId(),
                 event_id: this.state.initialEventId,
-                highlighted: this.state.isInitialEventHighlighted,
+                highlighted: false,
                 scroll_into_view: false,
                 replyingToEvent: this.state.replyToEvent,
                 metricsTrigger: undefined, // room doesn't change

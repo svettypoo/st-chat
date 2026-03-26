@@ -38,3 +38,5 @@ storybook-static
 .nx/workspace-data
 
 .pnpm-store
+apps/web/webapp_bak/
+Dockerfile
