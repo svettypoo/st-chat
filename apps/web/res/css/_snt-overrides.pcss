@@ -1,27 +1,51 @@
-/* S&T Chat Theme Overrides — WhatsApp-inspired (Gemini design + Opus refinements) */
+/* S&T Chat Theme — WhatsApp-inspired (Gemini colors + Opus refinements) */
 
 /* ===== LIGHT THEME ===== */
-.cpd-theme-light .mx_LeftPanel { background-color: #EDEFF1 !important; border-right: 1px solid #D1D7DB; }
+/* Left icon bar */
+.cpd-theme-light .mx_SpacePanel { background-color: #F0F2F5 !important; }
+.cpd-theme-light .mx_SpaceButton .mx_SpaceButton_icon { color: #667781 !important; }
+.cpd-theme-light .mx_SpaceButton.mx_SpaceButton_active .mx_SpaceButton_icon { color: #008069 !important; }
+.cpd-theme-light .mx_SpaceButton_selectionWrapper::before { background-color: #008069 !important; }
+/* Room list */
+.cpd-theme-light .mx_LeftPanel { background-color: #FFFFFF !important; border-right: 1px solid #D1D7DB; }
+.cpd-theme-light .mx_RoomTile:hover { background-color: rgba(0,0,0,0.04) !important; }
+/* Chat timeline */
 .cpd-theme-light .mx_RoomView_messagePanel { background-color: #E5DDD5 !important; background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E"); background-repeat: repeat; }
-.cpd-theme-light .mx_RoomHeader { background: #FFFFFF !important; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-bottom: none !important; }
-.cpd-theme-light .mx_MessageComposer_wrapper { background-color: #EDEFF1 !important; padding: 8px 16px; box-shadow: 0 -1px 3px rgba(0,0,0,0.1); border-top: none !important; }
+/* Room header */
+.cpd-theme-light .mx_RoomHeader { background: #EDEFF1 !important; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border-bottom: none !important; }
+/* Composer */
+.cpd-theme-light .mx_MessageComposer_wrapper { background-color: #EDEFF1 !important; padding: 8px 16px; box-shadow: 0 -1px 3px rgba(0,0,0,0.08); border-top: none !important; }
 .cpd-theme-light .mx_BasicMessageComposer .mx_BasicMessageComposer_input { background: #FFFFFF !important; border: 1px solid #D1D7DB !important; border-radius: 20px !important; padding: 8px 16px !important; min-height: 40px; }
-.cpd-theme-light .mx_EventTile[data-self="true"] .mx_EventTile_line { background-color: #D9FDD3; border-radius: 8px; padding: 8px 12px; margin: 4px 0; }
+/* Messages */
+.cpd-theme-light .mx_EventTile[data-self="true"] .mx_EventTile_line { background-color: #D9FDD3; border-radius: 8px; padding: 8px 12px; margin: 2px 0; }
 .cpd-theme-light .mx_EventTile:not([data-self="true"]) .mx_EventTile_line { background-color: transparent; }
-.cpd-theme-light .mx_RoomTile:hover { background-color: rgba(0,0,0,0.05) !important; }
 
 /* ===== DARK THEME ===== */
-.cpd-theme-dark .mx_LeftPanel { background-color: #171F26 !important; border-right: 1px solid #233138; }
+/* Left icon bar */
+.cpd-theme-dark .mx_SpacePanel { background-color: #121B22 !important; }
+.cpd-theme-dark .mx_SpaceButton .mx_SpaceButton_icon { color: #8696A0 !important; }
+.cpd-theme-dark .mx_SpaceButton.mx_SpaceButton_active .mx_SpaceButton_icon { color: #008069 !important; }
+.cpd-theme-dark .mx_SpaceButton_selectionWrapper::before { background-color: #008069 !important; }
+/* Room list */
+.cpd-theme-dark .mx_LeftPanel { background-color: #1F2C34 !important; border-right: 1px solid #233138; }
+.cpd-theme-dark .mx_RoomTile:hover { background-color: rgba(255,255,255,0.08) !important; }
+/* Chat timeline */
 .cpd-theme-dark .mx_RoomView_messagePanel { background-color: #0B141A !important; background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.02' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E"); background-repeat: repeat; }
+/* Room header */
 .cpd-theme-dark .mx_RoomHeader { background: #1F2C34 !important; box-shadow: 0 1px 3px rgba(0,0,0,0.3); border-bottom: none !important; }
+/* Composer */
 .cpd-theme-dark .mx_MessageComposer_wrapper { background-color: #1F2C34 !important; padding: 8px 16px; box-shadow: 0 -1px 3px rgba(0,0,0,0.3); border-top: none !important; }
 .cpd-theme-dark .mx_BasicMessageComposer .mx_BasicMessageComposer_input { background: #2A3942 !important; border: 1px solid #3B4A54 !important; border-radius: 20px !important; padding: 8px 16px !important; min-height: 40px; }
-.cpd-theme-dark .mx_EventTile[data-self="true"] .mx_EventTile_line { background-color: #005C4B; border-radius: 8px; padding: 8px 12px; margin: 4px 0; }
+/* Messages */
+.cpd-theme-dark .mx_EventTile[data-self="true"] .mx_EventTile_line { background-color: #005C4B; border-radius: 8px; padding: 8px 12px; margin: 2px 0; }
 .cpd-theme-dark .mx_EventTile:not([data-self="true"]) .mx_EventTile_line { background-color: transparent; }
-.cpd-theme-dark .mx_RoomTile:hover { background-color: rgba(255,255,255,0.05) !important; }
 
 /* ===== SHARED ===== */
+/* Fix bottom gap — remove padding-bottom on composer */
+.mx_RoomView .mx_MessageComposer { padding-bottom: 0 !important; }
+/* Room header — contact card style */
 .mx_RoomHeader .mx_BaseAvatar { width: 40px !important; height: 40px !important; }
 .mx_RoomHeader .mx_BaseAvatar img, .mx_RoomHeader .mx_BaseAvatar span { width: 40px !important; height: 40px !important; border-radius: 50% !important; }
 .mx_RoomHeader_heading { font-size: 16px !important; font-weight: 600 !important; }
-.mx_RoomHeader { cursor: pointer; }
+.mx_RoomHeader { cursor: pointer; height: 60px !important; }
+.mx_RoomHeader_infoWrapper { gap: 12px !important; }
