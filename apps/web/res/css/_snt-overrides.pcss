@@ -169,3 +169,79 @@
 .mx_RoomHeader {
     cursor: pointer;
 }
+
+/* ============================================ */
+/* FIX: Style Group layout messages (default)   */
+/* Bubble layout selectors don't apply in Group */
+/* ============================================ */
+
+/* Group layout — sent messages: subtle background */
+.cpd-theme-dark .mx_EventTile[data-self="true"] .mx_EventTile_line {
+    background-color: rgba(0, 92, 75, 0.15);
+    border-radius: 8px;
+    padding: 4px 8px;
+    margin: 2px 0;
+}
+.cpd-theme-light .mx_EventTile[data-self="true"] .mx_EventTile_line {
+    background-color: rgba(217, 253, 211, 0.5);
+    border-radius: 8px;
+    padding: 4px 8px;
+    margin: 2px 0;
+}
+
+/* Group layout — received messages: subtle card */
+.cpd-theme-dark .mx_EventTile:not([data-self="true"]) .mx_EventTile_line {
+    background-color: rgba(42, 57, 66, 0.4);
+    border-radius: 8px;
+    padding: 4px 8px;
+    margin: 2px 0;
+}
+.cpd-theme-light .mx_EventTile:not([data-self="true"]) .mx_EventTile_line {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    padding: 4px 8px;
+    margin: 2px 0;
+}
+
+/* ============================================ */
+/* Hide browser unsupported banner              */
+/* ============================================ */
+.mx_SupportedBrowserBanner {
+    display: none !important;
+}
+
+/* ============================================ */
+/* Stronger zone contrast                       */
+/* ============================================ */
+
+/* Dark: make sidebar even darker, timeline lighter */
+.cpd-theme-dark .mx_LeftPanel {
+    background-color: #171F26 !important;
+}
+.cpd-theme-dark .mx_RoomView_messagePanel {
+    background-color: #0B141A !important;
+}
+.cpd-theme-dark .mx_RoomHeader {
+    background-color: #1F2C34 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+.cpd-theme-dark .mx_MessageComposer_wrapper {
+    background-color: #1F2C34 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Light: sidebar cooler gray, timeline warmer */
+.cpd-theme-light .mx_LeftPanel {
+    background-color: #EDEFF1 !important;
+}
+.cpd-theme-light .mx_RoomView_messagePanel {
+    background-color: #E5DDD5 !important;
+}
+.cpd-theme-light .mx_RoomHeader {
+    background-color: #FFFFFF !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+.cpd-theme-light .mx_MessageComposer_wrapper {
+    background-color: #EDEFF1 !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
