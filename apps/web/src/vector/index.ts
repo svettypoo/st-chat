@@ -177,7 +177,7 @@ async function start(): Promise<void> {
         const loadPluginsPromise = loadPlugins();
         await settled(loadPluginsPromise);
 
-        let acceptBrowser = supportedBrowser;
+        let acceptBrowser = true; // S&T: skip browser check
         if (!acceptBrowser && window.localStorage) {
             acceptBrowser = Boolean(window.localStorage.getItem("mx_accepts_unsupported_browser"));
         }
