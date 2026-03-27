@@ -318,6 +318,7 @@ export default class MessageContextMenu extends React.Component<IProps, IState> 
         copyPlaintext(getSelectedText());
         this.closeMenu();
     };
+private onCopyMessageClick = (): void => {        const body = this.props.mxEvent.getContent().body;        if (body) copyPlaintext(body);        this.closeMenu();    };
 
     private onQuoteClick = (): void => {
         const selectedText = getSelectedText();
@@ -621,6 +622,7 @@ export default class MessageContextMenu extends React.Component<IProps, IState> 
             );
         }
 
+let copyMessageButton: JSX.Element | undefined;        if (rightClick && !selectedText) {            copyMessageButton = (                <IconizedContextMenuOption                    icon={<CopyIcon />}                    label={"Copy message"}                    onClick={this.onCopyMessageClick}                />            );        }
         let quoteButton: JSX.Element | undefined;
         if (rightClick && selectedText && selectedText.trim().length > 0 && this.isSelectionWithinSingleTextBody()) {
             quoteButton = (
@@ -702,6 +704,7 @@ export default class MessageContextMenu extends React.Component<IProps, IState> 
             nativeItemsList = (
                 <IconizedContextMenuOptionList>
                     {copyButton}
+                    {copyMessageButton}
                     {quoteButton}
                     {copyLinkButton}
                 </IconizedContextMenuOptionList>

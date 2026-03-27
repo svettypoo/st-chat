@@ -71,3 +71,20 @@
 /* ===== TEXT SELECTION — triple-click selects full message ===== */
 .mx_EventTile_body { user-select: text !important; -webkit-user-select: text !important; }
 .mx_EventTile_line { user-select: text !important; -webkit-user-select: text !important; }
+
+/* ===== SELECTED MESSAGE — remove border/shadow ===== */
+.mx_EventTile_selected .mx_EventTile_line { box-shadow: none !important; background-color: transparent !important; }
+.mx_EventTile_selected > .mx_EventTile_line { box-shadow: none !important; }
+.mx_EventTile.mx_EventTile_selected .mx_EventTile_line { box-shadow: none !important; background-color: rgba(0, 128, 105, 0.06) !important; border-radius: 8px; }
+
+/* ===== INPUT BORDER — thicker + more visible ===== */
+.cpd-theme-dark .mx_BasicMessageComposer .mx_BasicMessageComposer_input { border: 2px solid rgba(255,255,255,0.2) !important; }
+.cpd-theme-light .mx_BasicMessageComposer .mx_BasicMessageComposer_input { border: 2px solid rgba(0,0,0,0.15) !important; }
+
+/* ===== COMPOSER — center text vertically ===== */
+.mx_BasicMessageComposer .mx_BasicMessageComposer_input { display: flex !important; align-items: center !important; min-height: 44px !important; }
+.mx_MessageComposer_row { align-items: center !important; }
+
+/* ===== QUADRUPLE CLICK — select all text in message ===== */
+.mx_EventTile_body { user-select: all !important; -webkit-user-select: all !important; }
+.mx_EventTile_body * { user-select: text !important; -webkit-user-select: text !important; }
