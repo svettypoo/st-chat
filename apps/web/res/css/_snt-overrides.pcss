@@ -49,3 +49,25 @@
 .mx_RoomHeader_heading { font-size: 16px !important; font-weight: 600 !important; }
 .mx_RoomHeader { cursor: pointer; height: 60px !important; }
 .mx_RoomHeader_infoWrapper { gap: 12px !important; }
+
+/* ===== BORDERS & SEPARATORS ===== */
+/* Dark */
+.cpd-theme-dark .mx_SpacePanel { border-right: 1px solid rgba(255,255,255,0.08) !important; }
+.cpd-theme-dark .mx_RoomTile { border-bottom: 1px solid rgba(255,255,255,0.05) !important; }
+.cpd-theme-dark .mx_RoomHeader { border-bottom: 1px solid rgba(255,255,255,0.08) !important; }
+.cpd-theme-dark .mx_MessageComposer_wrapper { border-top: 1px solid rgba(255,255,255,0.08) !important; }
+.cpd-theme-dark .mx_BasicMessageComposer .mx_BasicMessageComposer_input { border: 1.5px solid rgba(255,255,255,0.15) !important; }
+/* Light */
+.cpd-theme-light .mx_SpacePanel { border-right: 1px solid rgba(0,0,0,0.08) !important; }
+.cpd-theme-light .mx_RoomTile { border-bottom: 1px solid rgba(0,0,0,0.06) !important; }
+.cpd-theme-light .mx_RoomHeader { border-bottom: 1px solid rgba(0,0,0,0.08) !important; }
+.cpd-theme-light .mx_MessageComposer_wrapper { border-top: 1px solid rgba(0,0,0,0.08) !important; }
+.cpd-theme-light .mx_BasicMessageComposer .mx_BasicMessageComposer_input { border: 1.5px solid rgba(0,0,0,0.12) !important; }
+
+/* ===== MESSAGE HOVER — remove glow ===== */
+.mx_EventTile:hover .mx_EventTile_line { box-shadow: none !important; }
+.mx_EventTile:hover::before { background: transparent !important; box-shadow: none !important; }
+
+/* ===== TEXT SELECTION — triple-click selects full message ===== */
+.mx_EventTile_body { user-select: text !important; -webkit-user-select: text !important; }
+.mx_EventTile_line { user-select: text !important; -webkit-user-select: text !important; }
