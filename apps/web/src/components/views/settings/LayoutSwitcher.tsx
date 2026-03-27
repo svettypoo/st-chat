@@ -43,9 +43,9 @@ function LayoutSelector(): JSX.Element {
                 await SettingsStore.setValue("layout", null, SettingLevel.DEVICE, newLayout);
             }}
         >
-            <LayoutRadio layout={Layout.Group} label={_t("common|modern")} />
+// SNT removed:             <LayoutRadio layout={Layout.Group} label={_t("common|modern")} />
             <LayoutRadio layout={Layout.Bubble} label={_t("settings|appearance|layout_bubbles")} />
-            <LayoutRadio layout={Layout.IRC} label={_t("settings|appearance|layout_irc")} />
+// SNT removed:             <LayoutRadio layout={Layout.IRC} label={_t("settings|appearance|layout_irc")} />
         </Root>
     );
 }
@@ -148,7 +148,7 @@ function ToggleCompactLayout(): JSX.Element {
                 name="compactLayout"
                 control={
                     <ToggleControl
-                        disabled={layout !== Layout.Group}
+// SNT removed:                         disabled={layout !== Layout.Group}
                         name="compactLayout"
                         defaultChecked={compactLayoutEnabled}
                     />
