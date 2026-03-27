@@ -26,9 +26,12 @@ interface MultiPaneLayoutState {
     panes: Pane[];
     activePaneIndex: number;
     layout: LayoutMode;
+    splitZoneVisible: boolean;
+    splitZoneDragOver: boolean;
 }
 
 const STORAGE_KEY = "mx_MultiPaneLayout";
+const MIN_SPLIT_WIDTH = 900;
 
 function loadFromStorage(): Partial<MultiPaneLayoutState> {
     try {
@@ -60,15 +63,21 @@ export class MultiPaneLayout extends React.Component<MultiPaneLayoutProps, Multi
             panes: saved.panes ?? [{ roomId: props.currentRoomId }],
             activePaneIndex: saved.activePaneIndex ?? 0,
             layout,
+            splitZoneVisible: false,
+            splitZoneDragOver: false,
         };
     }
 
     public componentDidMount(): void {
         window.addEventListener(LAYOUT_CHANGE_EVENT, this.onExternalLayoutChange as EventListener);
+        window.addEventListener("dragstart", this.onGlobalDragStart);
+        window.addEventListener("dragend", this.onGlobalDragEnd);
     }
 
     public componentWillUnmount(): void {
         window.removeEventListener(LAYOUT_CHANGE_EVENT, this.onExternalLayoutChange as EventListener);
+        window.removeEventListener("dragstart", this.onGlobalDragStart);
+        window.removeEventListener("dragend", this.onGlobalDragEnd);
     }
 
     public componentDidUpdate(prevProps: MultiPaneLayoutProps): void {
@@ -105,6 +114,46 @@ export class MultiPaneLayout extends React.Component<MultiPaneLayoutProps, Multi
         const panes = [...this.state.panes];
         panes[index] = { roomId };
         this.setState({ panes, activePaneIndex: index }, this.persist);
+    };
+
+    private onGlobalDragStart = (e: DragEvent): void => {
+        // Show split zone only in single-pane mode on wide enough screens
+        if (this.state.layout !== "1") return;
+        if (window.innerWidth <= MIN_SPLIT_WIDTH) return;
+        const roomId = e.dataTransfer?.types?.includes("text/x-room-id");
+        if (roomId) {
+            this.setState({ splitZoneVisible: true });
+        }
+    };
+
+    private onGlobalDragEnd = (): void => {
+        this.setState({ splitZoneVisible: false, splitZoneDragOver: false });
+    };
+
+    private onSplitZoneDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "link";
+        this.setState({ splitZoneDragOver: true });
+    };
+
+    private onSplitZoneDragLeave = (): void => {
+        this.setState({ splitZoneDragOver: false });
+    };
+
+    private onSplitZoneDrop = (e: React.DragEvent<HTMLDivElement>): void => {
+        e.preventDefault();
+        const roomId = e.dataTransfer.getData("text/x-room-id");
+        if (!roomId) return;
+        // Switch to 2-pane layout and put the dropped room in pane 2
+        const panes = [...this.state.panes];
+        panes.push({ roomId });
+        this.setState({
+            layout: "2",
+            panes,
+            activePaneIndex: 1,
+            splitZoneVisible: false,
+            splitZoneDragOver: false,
+        }, this.persist);
     };
 
     private getPaneCount(layout: LayoutMode = this.state.layout): number {
@@ -166,6 +215,12 @@ export class MultiPaneLayout extends React.Component<MultiPaneLayoutProps, Multi
             "mx_MultiPaneLayout_grid--4": layout === "4",
         });
 
+        const { splitZoneVisible, splitZoneDragOver } = this.state;
+        const splitZoneClass = classNames("mx_MultiPaneLayout_splitZone", {
+            "mx_MultiPaneLayout_splitZone--visible": splitZoneVisible,
+            "mx_MultiPaneLayout_splitZone--dragOver": splitZoneDragOver,
+        });
+
         return (
             <div className="mx_MultiPaneLayout">
                 <div className={gridClass}>
@@ -181,6 +236,18 @@ export class MultiPaneLayout extends React.Component<MultiPaneLayoutProps, Multi
                             onSelectRoom={this.onDropRoom}
                         />
                     ))}
+                    {layout === "1" && (
+                        <div
+                            className={splitZoneClass}
+                            onDragOver={this.onSplitZoneDragOver}
+                            onDragLeave={this.onSplitZoneDragLeave}
+                            onDrop={this.onSplitZoneDrop}
+                        >
+                            <div className="mx_MultiPaneLayout_splitZone_label">
+                                ⊞ Drop to open side by side
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         );
