@@ -19,6 +19,7 @@ Please see LICENSE files in the repository root for full details.
     flex: 1;
     min-height: 0;
     gap: 2px;
+    position: relative;
     background-color: var(--cpd-color-bg-subtle-secondary, #1a1a2e);
 
     &.mx_MultiPaneLayout_grid--1 {
@@ -263,4 +264,50 @@ Please see LICENSE files in the repository root for full details.
     font-size: 13px;
     color: var(--cpd-color-text-disabled, #555b67);
     text-align: center;
+}
+
+/* Split zone — appears on right edge in single-pane mode during room drag */
+.mx_MultiPaneLayout_splitZone {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, background 0.15s ease;
+    z-index: 50;
+    border-left: 2px dashed transparent;
+
+    &.mx_MultiPaneLayout_splitZone--visible {
+        pointer-events: auto;
+        opacity: 1;
+        background: rgba(99, 102, 241, 0.04);
+        border-left-color: rgba(99, 102, 241, 0.3);
+    }
+
+    &.mx_MultiPaneLayout_splitZone--dragOver {
+        background: rgba(99, 102, 241, 0.12);
+        border-left-color: rgba(99, 102, 241, 0.8);
+    }
+}
+
+.mx_MultiPaneLayout_splitZone_label {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(129, 140, 248, 0.7);
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    transition: color 0.15s ease, background 0.15s ease;
+
+    .mx_MultiPaneLayout_splitZone--dragOver & {
+        color: #818cf8;
+        background: rgba(99, 102, 241, 0.15);
+        border-color: rgba(99, 102, 241, 0.5);
+    }
 }
